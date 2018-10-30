@@ -6,15 +6,6 @@ import AppComponent from 'flow-app-component';
 import './style.css';
 
 class SpaceComponent extends AppComponent {
-  static properties = {
-    iconUrl: '/assets/images/space-component.png',
-    name: 'Space',
-    componentType: 'space',
-    category: 'Views',
-    parent: null,
-    allowsChildren: false
-  };
-
   constructor() {
     super();
     const newState = {
@@ -52,8 +43,12 @@ class SpaceComponent extends AppComponent {
           ],
         },
       ],
-
-      ...SpaceComponent.properties
+      iconUrl: '/assets/images/space-component.png',
+      name: 'Space',
+      componentType: 'space',
+      category: 'Views',
+      parent: null,
+      allowsChildren: false,
     };
 
     this.state = Object.assign(this.state, newState); // merge two states together, and dont lose any parent state properties.
