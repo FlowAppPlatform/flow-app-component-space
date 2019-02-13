@@ -54,6 +54,11 @@ class SpaceComponent extends AppComponent {
     this.state = Object.assign(this.state, newState); // merge two states together, and dont lose any parent state properties.
   }
 
+  triggerGraphEvent = () => {
+    const graphId = this.getPropertyData('event');
+    this.getElementProps().onEvent(graphId)
+  }
+
   renderContent() {
     const elemProps = this.getElementProps();
     const space = this.getPropertyData('vertical-sapce');
@@ -67,7 +72,12 @@ class SpaceComponent extends AppComponent {
     if (space === 'more') {
       style.marginTop = '60px';
     }
-    return <div className="node image" {...elemProps} style={style} />;
+    return (
+      <div 
+        className="node image" {...elemProps} style={style}
+        onMouseOver={this.triggerGraphEvent}
+      />
+    );
   }
 }
 
