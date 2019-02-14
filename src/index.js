@@ -34,8 +34,15 @@ class SpaceComponent extends AppComponent {
           categoryDescription: 'Events for the spacer',
           properties: [
             {
-              id: 'event',
-              name: 'Events',
+              id: 'load',
+              name: 'Load Event',
+              type: 'graph',
+              options: {},
+              data: null,
+            },
+            {
+              id: 'hover',
+              name: 'Hover Event',
               type: 'graph',
               options: {},
               data: null,
@@ -54,9 +61,13 @@ class SpaceComponent extends AppComponent {
     this.state = Object.assign(this.state, newState); // merge two states together, and dont lose any parent state properties.
   }
 
-  triggerGraphEvent = () => {
-    const graphId = this.getPropertyData('event');
-    this.getElementProps().onEvent(graphId)
+  componentDidMount() {
+    this.triggerGraphEvent('load');
+  }
+
+  triggerGraphEvent = (eventId) => {
+    const graphId = this.getPropertyData(eventId);
+    this.getElementProps().onEvent(graphId);
   }
 
   renderContent() {
@@ -75,7 +86,7 @@ class SpaceComponent extends AppComponent {
     return (
       <div 
         className="node image" {...elemProps} style={style}
-        onMouseOver={this.triggerGraphEvent}
+        onMouseOver={() => this.triggerGraphEvent('hover')}
       />
     );
   }
