@@ -67,12 +67,14 @@ class SpaceComponent extends AppComponent {
 
   triggerGraphEvent = (eventId) => {
     const graphId = this.getPropertyData(eventId);
-    this.getElementProps().onEvent(graphId);
+    if (typeof this.getElementProps().onEvent === 'function') {
+      this.getElementProps().onEvent(graphId);
+    }
   }
 
   renderContent() {
     const elemProps = this.getElementProps();
-    const space = this.getPropertyData('vertical-sapce');
+    const space = this.getPropertyData('vertical-space');
     const style = {};
     if (space === 'less') {
       style.marginTop = '20px';
